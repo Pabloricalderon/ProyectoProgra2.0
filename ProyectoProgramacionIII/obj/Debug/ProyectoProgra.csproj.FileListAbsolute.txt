@@ -1,0 +1,15 @@
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\bin\Debug\ProyectoProgra.exe.config
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\bin\Debug\ProyectoProgra.exe
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\bin\Debug\ProyectoProgra.pdb
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\bin\Debug\Newtonsoft.Json.dll
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\bin\Debug\Newtonsoft.Json.xml
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\obj\Debug\ProyectoProgra.csproj.AssemblyReference.cache
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\obj\Debug\ProyectoProgra.Form1.resources
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\obj\Debug\ProyectoProgra.IngresoDatos.resources
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\obj\Debug\ProyectoProgra.Properties.Resources.resources
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\obj\Debug\ProyectoProgra.csproj.GenerateResource.cache
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\obj\Debug\ProyectoProgra.csproj.CoreCompileInputs.cache
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\obj\Debug\Proyecto.D13AF10B.Up2Date
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\obj\Debug\ProyectoProgra.exe
+C:\Users\edgar\Source\Repos\ProyectoProgramacionIII\obj\Debug\ProyectoProgra.pdb
+C:\Users\edgar\source\repos\ProyectoProgramacionIII\obj\Debug\ProyectoProgra.Reportes.resources
