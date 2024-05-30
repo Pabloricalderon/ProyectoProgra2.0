@@ -28,5 +28,12 @@ namespace ProyectoProgra
             IngresoDatos form = new IngresoDatos();
             form.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Reportes form = new Reportes();
+            form.Show();
+        }
     }
 }

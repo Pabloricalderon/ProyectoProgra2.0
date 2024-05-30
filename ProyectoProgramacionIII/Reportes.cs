@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,9 @@ namespace ProyectoProgra
     public partial class Reportes : Form
     {
         List<clsAbastecimientos> abastes = new List<clsAbastecimientos>();
+        List<clsAbastecimientos> reportes = new List<clsAbastecimientos>();
+        List<clsAbastecimientos> rep1 = new List<clsAbastecimientos>();
+
         public Reportes()
         {
             InitializeComponent();
@@ -41,64 +45,114 @@ namespace ProyectoProgra
             reader.Close();
         }
 
+
+        //private void LeerJson()
+        //{
+        //    ////Se crea una lista con la misma estructura que tienen los datos en el archivo
+        //    //List<clsAbastecimientos> lista = new List<clsAbastecimientos>();
+
+        //    ////El nombre del archivo a utilizar
+        //    string archivo = "Datos.json";
+
+        //    //Se abre el archivo
+        //    StreamReader jsonStream = File.OpenText(archivo);
+
+        //    //Se Lee todo el contenido del archivo y el contenido leído se guarda en una variable cualquiera de tipo string.
+        //    //aquí no se necesitan ciclos pues el método ReadToEnd() lee todo el contenido de una sola vez.
+        //    string json = jsonStream.ReadToEnd();
+
+        //    //Se cierra el archivo
+        //    jsonStream.Close();
+
+        //    //Se deserializa (convierte) la cadena json guardada en la variable, a la estructura que tiene la lista a donde se van a cargar los datos
+        //    abastes = JsonConvert.DeserializeObject<List<clsAbastecimientos>>(json);
+        //}
+
         public void MostrarDatos()
         {
 
-            dgvInformacion.DataSource = null;
-            dgvInformacion.DataSource = informacion;
-            dgvInformacion.Refresh();
+            
         }
 
-        public void CargarAlquileres()
+        public void CargarCierreCaja()
         {
+            
 
 
-            foreach (clsAlquileres alquiler in alquileres)
+            // Limpiar la lista de reportes antes de agregar nuevos datos
+            rep1.Clear();
+
+            // Agregar todos los registros filtrados a la lista de reportes
+            foreach (var abastecimiento in abastes)
             {
-                clsClientes cliente = clientes.FirstOrDefault(c => c.Nit == alquiler.Nit);
-                if (cliente != null)
+                clsAbastecimientos reporte = new clsAbastecimientos
                 {
-
-                    clsVehiculos vehiculo = vehiculos.FirstOrDefault(v => v.Placa == alquiler.Placa);
-                    if (vehiculo != null)
-                    {
-
-                        // Calcular el total a pagar
-
-                        decimal totalPagar = alquiler.KilometrosRecorridos * vehiculo.PrecioKlm;
-
-
-                        clsInformacion reporte = new clsInformacion
-                        {
-                            Nombre = cliente.Nombre,
-                            Placa = vehiculo.Placa,
-                            Modelo = vehiculo.Modelo,
-                            Marca = vehiculo.Marca,
-                            Color = vehiculo.Color,
-                            PrecioKm = vehiculo.PrecioKlm,
-                            Fechadevolucion = alquiler.FechaDevolucion,
-                            Totalpagar = totalPagar,
-                        };
-                        informacion.Add(reporte);
-
-
-                    }
-
-
-
-
-                }
-
+                    NombreCliente = abastecimiento.NombreCliente,
+                    FechaAbas = abastecimiento.FechaAbas,
+                    TipoAbas = abastecimiento.TipoAbas,
+                    Importe = abastecimiento.Importe,
+                    Formallenado = abastecimiento.Formallenado,
+                };
+                rep1.Add(reporte);
             }
 
-            MostrarDatos();
+            dgvCierracaja.DataSource = null;
+            dgvCierracaja.DataSource = rep1;
+            dgvCierracaja.Refresh();
+
+            // Ocultar la columna "NoBomba"
+            if (dgvCierracaja.Columns["NoBomba"] != null)
+            {
+                dgvCierracaja.Columns["NoBomba"].Visible = false;
+            }
+        }
+
+        public void CargarPrepago()
+        {
+            string busqueda = "Pre-pago";
+
+            // Filtrar los registros que cumplen la condición de "Pre-pago"
+            var prepagos = abastes.Where(v => v.Formallenado == busqueda);
+
+            // Limpiar la lista de reportes antes de agregar nuevos datos
+            reportes.Clear();
+
+            // Agregar todos los registros filtrados a la lista de reportes
+            foreach (var abastecimiento in prepagos)
+            {
+                clsAbastecimientos reporte = new clsAbastecimientos
+                {
+                    NombreCliente = abastecimiento.NombreCliente,
+                    FechaAbas = abastecimiento.FechaAbas,
+                    TipoAbas = abastecimiento.TipoAbas,
+                    Importe = abastecimiento.Importe,
+                    Formallenado = abastecimiento.Formallenado,
+                };
+                reportes.Add(reporte);
+            }
+
+            dgvAbasPrepago.DataSource = null;
+            dgvAbasPrepago.DataSource = reportes;
+            dgvAbasPrepago.Refresh();
+
+            // Ocultar la columna "NoBomba"
+            if (dgvAbasPrepago.Columns["NoBomba"] != null)
+            {
+                dgvAbasPrepago.Columns["NoBomba"].Visible = false;
+            }
         }
 
 
 
         private void Reportes_Load(object sender, EventArgs e)
         {
+            LeerAbastecimientos();
+        }
 
+        private void btnMostrar_Click(object sender, EventArgs e)
+        {
+            CargarPrepago();
+            CargarCierreCaja();
         }
     }
 }
